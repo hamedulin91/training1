@@ -1,25 +1,42 @@
 #include <iostream>
+#include <string>
 
-void sortArr(const int *arr, int sarr)
+class User
 {
-	for (int i = 0; i < sarr; ++i)
-	{
-		int minarr = 0;
-		int tmp;
-		for (int ii = i; ii < sarr; ++ii)
-		{
+	std::string name;
+	std::string race;
+	int level;
+	int age;
 
-		}
+public:
+	/*User()
+	{
+		name = "VIktor";
+		race = "Ork";
+		level = 80;
+		age = 30;
+	}
+	*/
+
+	User(std::string n, std::string r, int l, int a)
+	{
+		name = n;
+		race = r;
+		level = l;
+		age = a;
 	}
 
-}
+	std::string getName() { return name; }
+	std::string getRace() { return race; }
+	int			getLevel() { return level; }
+	int			getAge() { return age; }
+
+};
 
 int main()
 {
-	int arr[]{4,8,34,5,76,12,21,11,65,3};
-	int sarr = sizeof(arr) / sizeof(arr[0]);
-
-	sortArr(arr,sarr);
+	User Viktor{"Mikle","Goblin",100,200};
+	std::cout << Viktor.getName()<<"\n"<< Viktor.getRace()<<"\n"<< Viktor.getLevel()<<"\n"<< Viktor.getAge();
 
 
 	return 0;
