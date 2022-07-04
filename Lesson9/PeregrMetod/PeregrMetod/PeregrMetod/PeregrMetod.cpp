@@ -1,33 +1,32 @@
 #include <iostream>
 
-class test
+class gamer
 {
 private:
-	int a;
+	int score;
 public:
-	test(int aA = 0):a(aA) {}
+	gamer(int s=0):score(s) {}
 
-	test operator+ (int c);
+	int getS() { return score; }
 
-	int getA()
-	{
-		return a;
-	}
+	gamer operator+(gamer& a);
+
 };
 
-test test::operator+(int c)
+gamer gamer::operator+(gamer& a)
 {
-	return test(a + c);
+	return gamer(score + a.score);
 }
+
+
+
 
 int main()
 {
-	test one(1991);
-	int year(30);
-
-	test two = one + year;
-
-	std::cout << two.getA();
+	gamer Mik(100);
+	gamer Vik(200);
+	gamer team(Mik + Vik);
+	std::cout << team.getS();
 
 	return 0;
 }

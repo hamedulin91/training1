@@ -1,41 +1,27 @@
 #include <iostream>
 
-class test
+class Gamer
 {
-	int a;
-
+private:
+	int score;
 public:
-	test(int val)
-	{
-		a = val;
-	}
+	Gamer(int sScore = 0):score(sScore) {}
 
-	int getA() const
-	{
-		return a;
-	}
+	int getScore() const { return score; }
+
 };
 
-
-
-test operator+ (test const& a, test const& b)
+Gamer operator* (const Gamer& a, const Gamer& b)
 {
-	test sum = a.getA()+b.getA();
-	return sum;
+	return Gamer(a.getScore() * b.getScore());
 }
-
 
 int main()
 {
-	test a(1991);
-	test b(30);
+	Gamer vik(500);
+	Gamer mik(100);
+	Gamer team(vik * mik);
 
-	test sum(a + b);
-
-	std::cout << sum.getA();
-
-
-
-
+	std::cout << team.getScore()<<std::endl;
 	return 0;
 }

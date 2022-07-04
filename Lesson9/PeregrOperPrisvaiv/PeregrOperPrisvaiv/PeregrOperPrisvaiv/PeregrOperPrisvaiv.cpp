@@ -1,82 +1,41 @@
 #include <iostream>
 
-class test
+class player
 {
-	int* a;
-	int sa;
+private:
+	int score;
+	int level;
 public:
-	test(int val)
-	{
-		std::cout << "Вызвался коструктор: " <<this<< std::endl;
-		sa = val;
-		a = new int[sa];
+	player(int l = 0 , int s = 0):level(l),score(s) {}
 
-		for (int i = 0; i < sa; ++i)
-		{
-			a[i] = i;
-		}
-	}
+	player(const player& p) :score(p.score), level(p.level) {}
 
-	test(const test& b)
-	{
-		std::cout << "Вызвался конструктор копирования : " << this << std::endl;
- 
-		this->a = new int[b.sa];
+	player& operator= (const player& a);
 
-		this->sa = b.sa;
-
-		for (int ii = 0; ii < this->sa; ++ii)
-		{
-			this->a[ii] = b.a[ii];
-		}
-
-
-
-	}
-
-	test & operator = (const test &c) 
-	{
-		std::cout << "Перегрузка оператора = " << this << std::endl;
-
-		this->sa = c.sa;
-
-		if (this->a != nullptr)
-		{
-			delete []this->a;
-		}
-
-		this->a = new int[c.sa];
-
-		for (int iii = 0; iii < c.sa; ++iii)
-		{
-			this->a[iii] = c.a[iii];
-		}
-
-		return *this;
-	}
-
-	~test()
-	{
-		std::cout << "Вывзался деструктор: " << this << std::endl;
-		delete[]a;
-	}
-
+	friend std::ostream& operator<<(std::ostream& o, const player& b);
 };
+
+std::ostream& operator<<(std::ostream& o, const player& b)
+{
+	o << b.level << " " << b.score << std::endl;
+	return o;
+}
+
+player& player::operator= (const player& b)
+{
+	score = b.score;
+	level = b.level;
+	return *this;
+}
 
 int main()
 {
-	setlocale(LC_ALL , "Russian");
+	player Vik(80, 800);
 
-	test a(5);
-	
-	test a1(a);
+	player Mik;
 
-	test b(10);
+	Mik = Vik;
 
-	a = b;
-
-	test c(2);
-	c = a = b;
 
 	return 0;
 }

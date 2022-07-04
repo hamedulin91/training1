@@ -1,35 +1,48 @@
+/*
 #include <iostream>
+#include <string>
 
-class test
+class gamer
 {
-private: 
-	int x, y, z;
+	std::string name;
+	std::string race;
+	int level;
+	double score;
+
 public:
-	test(int xX = 0, int yY = 0, int zZ = 0) : x(xX), y(yY), z(zZ) {}
+	gamer(std::string n="noname", std::string r="norace", int l = 0, int s = 0):
+	name(n),race(r),level(l),score(s) {}
 
-
-	friend std::ostream& operator<<(std::ostream& a, const test& b);
-
-	void print()
-	{
-		std::cout << x << y << z;
-	}
+	friend std::ostream& operator<< (std::ostream &o, const gamer &b);
+	friend std::istream& operator>> (std::istream& i, gamer& b);
 };
 
-std::ostream& operator<<(std::ostream& a, const test& b)
+std::ostream& operator<<(std::ostream& o, const gamer& b)
 {
-	a << b.x << b.y << b.z;
-	return a;
+	o << b.name << " " << b.race << " " << b.score << " " << b.level << std::endl;
+	return o;
 }
 
+std::istream& operator>>(std::istream& i, gamer& b)
+{
+	i >> b.name;
+	i >> b.race;
+	i >> b.score;
+	i >> b.level;
+	return i;
+}
 
 int main()
 {
-	test coord;
-	test coord(1991, 2013.2022);
+	gamer vik;
 	
-	std::cout << "Hello" << coord << "goodby"<<coord;
+	std::cout << "Enter Name, Race, Score and Level: ";
+	std::cin >> vik;
 
+	std::cout << "your Heroes: ";
+	std::cout << vik;
 
 	return 0;
 }
+*/
+

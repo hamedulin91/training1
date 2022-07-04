@@ -26,11 +26,16 @@ bool operator != (const gamer & a, const gamer & b)
 int main()
 {
 	gamer Noname;
-	gamer Viktor("Viktor", "Human");
-	gamer Mikle("Mikle", "Human");
-	gamer Nik("Nik", "Ork");
+	gamer Noname1("Viktor", "Ork");
 
-
+	if (Noname == Noname1)
+	{
+		std::cout << "Human same";
+	}
+	if (Noname != Noname1)
+	{
+		std::cout << "Human NO some";
+	}
 
 	return 0;
 }

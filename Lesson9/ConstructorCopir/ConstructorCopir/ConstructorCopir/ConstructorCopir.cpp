@@ -1,66 +1,41 @@
 #include <iostream>
+#include <cassert>
 
-
-class test
+class player
 {
-	int* a;
-	int sa;
-
+private:
+	int level;
+	double score;
 public:
-	test(int val)
+	player(int l = 0, double s = 0.0):level(l), score(s) 
 	{
-		std::cout << "Вызвался конструктор " << this << std::endl;
-		sa = val;
-		a = new int[val];
-		for (int i = 0; i < val; ++i)
-		{
-			a[i] = i;
-		}
+		assert(l >= 0 && l < 80);
+		assert(s >= 0 && s < 800);
 	}
 
-	test(const test& b)
+	player(const player &player): level(player.level), score(player.score)
 	{
-		std::cout << "Вызвался конструктор копирования: "<<this << std::endl;
-
-		this->a = new int [b.sa];
-		this->sa = b.sa;
-
-		for (int ii = 0; ii < b.sa; ++ii)
-		{
-			this->a[ii] = b.a[ii];
-		}
+		std::cout << "Constructor copy"<<std::endl;
 	}
 
-	~test()
-	{
-		std::cout << "Вызвался деструктор " << this << std::endl;
-		delete [] a;
-	}
-
-	void print()
-	{
-		for(int ii=0; ii<sa; ++ii)
-		{
-			std::cout << a[ii];
-		}
-
-		std::cout << std::endl;
-	}
+	friend std::ostream& operator<<(std::ostream &o, const player& b);
 
 };
 
+std::ostream& operator<<(std::ostream& o, const player& b)
+{
+	o << b.level <<" " << b.score<<std::endl;
+	return o;
+}
+
+
 int main()
 {
-	setlocale(0, "");
+	//player Vik(50, 500);
+	player Mik(player(50,500));
 
-	test obj(5);
-	obj.print();
-
-	std::cout << std::endl;
-
-	test ob(obj);
-	ob.print();
-
+	//std::cout << Vik;
+	std::cout << Mik;
 
 	return 0;
 }
