@@ -20,21 +20,39 @@ public:
 
 };
 
+
+template<>
+class repos8<bool>
+{
+private:
+	unsigned char m_data;
+public:
+	repos8() :m_data(8) {}
+	void set(int ind, bool val)
+	{
+		unsigned char mask = 1 << ind;
+
+		if (val)
+		{
+			m_data |= mask;
+		}
+		else
+		{
+			m_data &= ~mask;
+		}
+	}
+
+	bool get(int ind)
+	{
+		unsigned char mask = 1 << ind;
+		return (m_data & mask) != 0;
+	}
+
+};
+
 int main()
 {
-	repos8<int> rep;
 
-	for (int i = 0; i < 8; ++i)
-	{
-		rep.set(i, i);	
-	}
-
-	for (int ii = 0; ii < 8; ++ii)
-	{
-		std::cout << rep.get(ii);
-	}
-
-	
 
 	return 0;
 }
